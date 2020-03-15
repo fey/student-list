@@ -1,60 +1,42 @@
 <?php
 
-require_once dirname(__DIR__)  . "/vendor/autoload.php";
+use App\Http\Request;
+use App\Http\Router;
 
-const METHOD_GET = 'GET';
-const METHOD_POST = 'POST';
+use function App\students\getStudents;
+use function App\Template\view;
 
-function getQueryParams()
-{
-    return array_merge($_GET);
-}
+require_once dirname(__DIR__) . "/vendor/autoload.php";
 
-function getQueryParam($key, $default = null)
-{
-    $params = getQueryParams();
+require_once __DIR__ . '/../vendor/autoload.php';
 
-    return array_key_exists($key, $params) ? $params[$key] : $default;
-}
+$router = new Router();
 
-function getJsonRequestBody(): array
-{
-    $inputJSON = file_get_contents('php://input');
-    $input = json_decode($inputJSON, TRUE);
+$router->get(
+    '/',
+    function (Request $request) {
+        $page = (int)$request->getQueryParam('page', 1);
+        $limit = (int)$request->getQueryParam('limit', 10);
 
-    return $input ?? [];
-}
+        return view(
+            'index',
+            [
+                'students' => getStudents($page, $limit),
+                'page' => $page,
+            ]
+        );
+    }
+);
 
-function getFormData()
-{
-    return $_POST;
-}
+$router->get('/register', fn() => view('register'));
+$router->get('/login', fn() => view('login'));
+$router->get('/edit', fn() => null);
+$router->post('/login', fn() => null);
 
-function getHttpMethod()
-{
-    return $_SERVER['REQUEST_METHOD'];
-}
+$router->post('/logout', fn() => null);
+$router->post('/search', function (Request $request) {
+    $searchSubstring = $request->getBody('search');
+    return view('search');
+});
 
-
-function getRequestUri(): string
-{
-    return $_SERVER['PATH_INFO'] ?? '/';
-}
-
-function isHandableRoute($method, $uri): bool
-{
-    return getHttpMethod() === $method && getRequestUri() === $uri;
-}
-
-switch (true):
-    case isHandableRoute(METHOD_GET, '/'):
-        echo '/';
-        return;
-    case isHandableRoute(METHOD_GET, '/register'):
-        echo '/register';
-        return;
-endswitch;
-
-var_dump(getRequestUri(), $_REQUEST, $_GET, $_POST, getJsonRequestBody(), $_SERVER);
-
-exit;
+$router->run();

@@ -10,7 +10,14 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/config.php",
+            "app/Http/Response.php",
+            "app/Renderer/Renderer.php",
+            "app/Template/Template.php",
+            "app/students.php"
+        ]
     },
     "require": {
         "php": ">=7.4"
