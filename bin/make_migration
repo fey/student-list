@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+
+use function App\Functions\baseDir;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+if ($argc < 2) {
+    throw new Exception('Migration name should be given');
+}
+
+$migrationNameParts = array_slice($argv, 1);
+$migrationHumanName = str_replace(' ', '_', implode('_', $migrationNameParts));
+
+$timestamp = date('YmtHis');
+
+$baseDir = baseDir();
+
+$fullMigrationFilePath = "{$baseDir}/database/migrations/{$timestamp}_{$migrationHumanName}.sql";
+
+echo "$fullMigrationFilePath\n";
+
+touch($fullMigrationFilePath);
