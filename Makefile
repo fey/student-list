@@ -5,10 +5,10 @@ start:
 	php -S localhost:8000 -t public/
 
 lint:
-	composer exec phpcs -- --standard=psr12 public
+	composer exec phpcs
 
 lint-fix:
-	composer exec phpcbf -- --standard=psr12 public
+	composer exec phpcbf
 
 static-analyse:
 	composer exec phpstan analyse
