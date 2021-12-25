@@ -33,4 +33,3 @@ students list
 
 search form
   form search by first_name, last_name, group_id
-  

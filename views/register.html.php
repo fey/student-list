@@ -32,9 +32,6 @@
   <main>
     <h1 class="p-5">Registration</h1>
     <div class="card">
-      <div class="card-header">
-        Registration
-      </div>
       <div class="card-body p-3">
         <form>
           <div class="mb-3">
