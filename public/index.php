@@ -2,12 +2,22 @@
 
 declare(strict_types=1);
 
+use function App\Functions\array_get;
 use function App\Functions\getRequestPath;
 use function App\Functions\view;
-
+use function App\Functions\baseDir;
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$routes = [
+$baseDir = baseDir();
+$pdo = new PDO("sqlite:{$baseDir}/database/database.sqlite3");
+
+
+$pdo->exec('CREATE TABLE student IF NOT EXISTS students ()');
+$pdoStatement = $pdo->query('SELECT * from STUDENTS');
+
+dd($pdoStatement->fetchAll());
+
+$handlersByRoutesMap = [
     '/' => fn() => view('index'),
     '/register' => fn() => view('register'),
     '/login' => fn() => view('login'),
@@ -15,14 +25,11 @@ $routes = [
     '/edit' => fn() => view('edit')
 ];
 
-$requestPath = getRequestPath();
-
-if (!array_key_exists($requestPath, $routes)) {
+$notFoundHandler = function () {
     http_response_code(404);
-    echo '404 not Found';
-    exit;
-}
+    return  view('errors/404');
+};
 
-$handler = $routes[$requestPath];
+$handler = array_get($handlersByRoutesMap, getRequestPath(), $notFoundHandler);
 
 echo $handler();
