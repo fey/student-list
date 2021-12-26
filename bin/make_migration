@@ -5,8 +5,8 @@ use function App\Functions\baseDir;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$timestamp = date('YmtHis');
 $baseDir = baseDir();
-$fullMigrationFilePath = "{$baseDir}/database/migrations/{$timestamp}_{$migrationHumanName}.sql";
 
 if ($argc < 2) {
     throw new Exception('Migration name should be given');
@@ -14,9 +14,8 @@ if ($argc < 2) {
 
 $migrationNameParts = array_slice($argv, 1);
 $migrationHumanName = str_replace(' ', '_', implode('_', $migrationNameParts));
+$fullMigrationFilePath = "{$baseDir}/database/migrations/{$timestamp}_{$migrationHumanName}.sql";
 
-$timestamp = date('YmtHis');
-
-echo "$fullMigrationFilePath\n";
+echo "$migrationHumanName\n";
 
 touch($fullMigrationFilePath);

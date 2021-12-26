@@ -11,16 +11,18 @@ $baseDir = baseDir();
 $pdo = new PDO("sqlite:{$baseDir}/database/development.sqlite3");
 $pdo->exec('DELETE FROM students');
 
-$insertQueryParts = array_reduce(range(1, 10), function ($acc, $i) {
-    $query = "
-INSERT INTO students (first_name, last_name, gender, email, group_id)
-    VALUES ('first_name ${i}', 'last_name ${i}', 'male', 'student${i}@test.io', 'ASDF123');
-";
+$birthday = new DateTime('1970-01-01');
+
+$valuesParts = array_reduce(range(1, 10), function ($acc, $i) use ($birthday) {
+    $examPoints = rand(50, 200);
+    $query = "('first_name ${i}', 'last_name ${i}', 'male', 'student${i}@test.io', 'ASDF123', '', '{$birthday->format('Y-m-d')}', '{$examPoints}')";
 
     return [...$acc, $query];
 }, []);
 
-$resultQuery = implode("", $insertQueryParts);
+$joinedValuesParts = implode(",\n",$valuesParts);
+
+$resultQuery = "INSERT INTO students (first_name, last_name, gender, email, group_id, hashed_password, birthday, exam_points) VALUES {$joinedValuesParts};\n";
 
 $pdo->exec($resultQuery);
 

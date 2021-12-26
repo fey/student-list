@@ -1,8 +1,0 @@
-CREATE TABLE IF NOT EXISTS students (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    first_name VARCHAR NOT NULL,
-    last_name VARCHAR NOT NULL,
-    gender VARCAHR NOT NULL,
-    email VARCHAR UNIQUE NOT NULL,
-    group_id VARCHAR
-);

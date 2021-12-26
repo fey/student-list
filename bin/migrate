@@ -10,13 +10,19 @@ echo "Starting migrating database...\n";
 $baseDir = baseDir();
 $pdo = new PDO("sqlite:{$baseDir}/database/development.sqlite3");
 
-$migrationsDirectoryPath = "{$baseDir}/database/migrations";
-$migrationFilesPaths = glob("{$migrationsDirectoryPath}/*.sql");
+$pdo->exec(<<<SQL
+DROP TABLE IF EXISTS students;
+CREATE TABLE IF NOT EXISTS students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name VARCHAR NOT NULL,
+    last_name VARCHAR NOT NULL,
+    gender VARCAHR NOT NULL,
+    email VARCHAR UNIQUE NOT NULL,
+    hashed_password VARCHAR NOT NULL,
+    group_id VARCHAR,
+    birthday DATE NOT NULL,
+    exam_points int NOT NULL
+);
+SQL);
 
-foreach ($migrationFilesPaths as $migrationFilePath) {
-    $fileContent = file_get_contents($migrationFilePath);
-
-    $migrationName = pathinfo($migrationFilePath, PATHINFO_FILENAME);
-    echo "{$migrationName}\n";
-    $pdo->exec($fileContent);
-}
+echo "...Done\n";
