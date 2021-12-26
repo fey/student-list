@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+use function App\Functions\baseDir;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+echo "Starting seeds database...\n";
+
+$baseDir = baseDir();
+$pdo = new PDO("sqlite:{$baseDir}/database/development.sqlite3");
+$pdo->exec('DELETE FROM students');
+
+$insertQueryParts = array_reduce(range(1, 10), function ($acc, $i) {
+    $query = "
+INSERT INTO students (first_name, last_name, gender, email, group_id)
+    VALUES ('first_name ${i}', 'last_name ${i}', 'male', 'student${i}@test.io', 'ASDF123');
+";
+
+    return [...$acc, $query];
+}, []);
+
+$resultQuery = implode("", $insertQueryParts);
+
+$pdo->exec($resultQuery);
+
+echo "...Done!\n";

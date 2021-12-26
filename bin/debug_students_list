@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+
+use function App\Functions\baseDir;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$baseDir = baseDir();
+$pdo = new PDO("sqlite:{$baseDir}/database/development.sqlite3");
+
+$statement = $pdo->query('SELECT * FROM students', PDO::FETCH_ASSOC);
+
+dd($statement->fetchAll());

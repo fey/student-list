@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+
+use function App\Functions\baseDir;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+echo "Starting migrating database...\n";
+
+$baseDir = baseDir();
+$pdo = new PDO("sqlite:{$baseDir}/database/development.sqlite3");
+
+$migrationsDirectoryPath = "{$baseDir}/database/migrations";
+$migrationFilesPaths = glob("{$migrationsDirectoryPath}/*.sql");
+
+foreach ($migrationFilesPaths as $migrationFilePath) {
+    $fileContent = file_get_contents($migrationFilePath);
+
+    $migrationName = pathinfo($migrationFilePath, PATHINFO_FILENAME);
+    echo "{$migrationName}\n";
+    $pdo->exec($fileContent);
+}
