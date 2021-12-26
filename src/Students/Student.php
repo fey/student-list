@@ -15,6 +15,7 @@ class Student
         public string $groupId,
         public DateTime $birthday,
         public string $gender,
+        public int $examPoints
     ) {
     }
 
@@ -28,7 +29,8 @@ class Student
             $data['hashed_password'],
             $data['group_id'],
             new DateTime($data['birthday']),
-            $data['gender']
+            $data['gender'],
+            $data['exam_points']
         );
     }
 }

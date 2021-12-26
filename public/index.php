@@ -15,23 +15,16 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 
 $config = [
-    'env' => getenv('APP_ENV') ?? 'development'
+    'env' => getenv('APP_ENV') ?: 'development'
 ];
-
 $baseDir = baseDir();
 $pdo = new PDO("sqlite:{$baseDir}/database/{$config['env']}.sqlite3");
 
-
-// $pdo->exec('CREATE TABLE student IF NOT EXISTS students ()');
-// $pdoStatement = $pdo->query('SELECT * from STUDENTS');
-
-// dd($pdoStatement->fetchAll());
-
 $studentsTableGateway = new StudentsTableGateway($pdo);
-$studentsListHandler = new StudentsListHandler();
+$studentsListHandler = new StudentsListHandler($studentsTableGateway);
 
 $handlersByRoutesMap = [
-    '/' => fn() => view('index'),
+    '/' => $studentsListHandler,
     '/register' => fn() => view('register'),
     '/login' => fn() => view('login'),
     '/logout' => fn() => 'logged out',

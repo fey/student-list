@@ -42,78 +42,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Lorem</td>
-          <td>Ipsum</td>
-          <td>I12AS2</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Lorem</td>
-          <td>Ipsum</td>
-          <td>I12AS2</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Lorem</td>
-          <td>Ipsum</td>
-          <td>I12AS2</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Lorem</td>
-          <td>Ipsum</td>
-          <td>I12AS2</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Lorem</td>
-          <td>Ipsum</td>
-          <td>I12AS2</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Lorem</td>
-          <td>Ipsum</td>
-          <td>I12AS2</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Lorem</td>
-          <td>Ipsum</td>
-          <td>I12AS2</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Lorem</td>
-          <td>Ipsum</td>
-          <td>I12AS2</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Lorem</td>
-          <td>Ipsum</td>
-          <td>I12AS2</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Lorem</td>
-          <td>Ipsum</td>
-          <td>I12AS2</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Lorem</td>
-          <td>Ipsum</td>
-          <td>I12AS2</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>Lorem</td>
-          <td>Ipsum</td>
-          <td>I12AS2</td>
-          <td>100</td>
-        </tr>
+        <?php foreach ($students as $student): ?>
+          <tr>
+            <td><?= $student->firstName ?></td>
+            <td><?= $student->lastName ?></td>
+            <td><?= $student->groupId ?></td>
+            <td><?= $student->examPoints ?></td>
+          </tr>
+        <?php endforeach ?>
       </tbody>
 
     </table>
