@@ -1,28 +1,12 @@
 #!/usr/bin/env php
 <?php
 
-use function App\Functions\baseDir;
+use function App\Functions\migrate;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 echo "Starting migrating database...\n";
 
-$baseDir = baseDir();
-$pdo = new PDO("sqlite:{$baseDir}/database/development.sqlite3");
-
-$pdo->exec(<<<SQL
-DROP TABLE IF EXISTS students;
-CREATE TABLE IF NOT EXISTS students (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    first_name VARCHAR NOT NULL,
-    last_name VARCHAR NOT NULL,
-    gender VARCAHR NOT NULL,
-    email VARCHAR UNIQUE NOT NULL,
-    hashed_password VARCHAR NOT NULL,
-    group_id VARCHAR,
-    birthday DATE NOT NULL,
-    exam_points int NOT NULL
-);
-SQL);
+migrate('development');
 
 echo "...Done\n";

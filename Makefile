@@ -1,3 +1,8 @@
+setup:
+	touch database/development.sqlite3
+	touch database/testing.sqlite3
+	make install
+
 install:
 	composer install
 
@@ -14,4 +19,4 @@ static-analyse:
 	composer exec phpstan analyse
 
 migrate:
-	echo "start migration"
+	php bin/migrate

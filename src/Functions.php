@@ -2,6 +2,8 @@
 
 namespace App\Functions;
 
+use \PDO;
+
 function array_get(array $array, $key, mixed $default = null): mixed
 {
     if (array_key_exists($key, $array)) {
@@ -56,4 +58,25 @@ function view(string $viewName, array $params = []): string
     ob_start();
     include $viewFullPath;
     return ob_get_clean();
+}
+
+function migrate(string $database): void
+{
+    $baseDir = baseDir();
+    $pdo = new PDO("sqlite:{$baseDir}/database/{$database}.sqlite3");
+
+    $pdo->exec(<<<SQL
+    DROP TABLE IF EXISTS students;
+    CREATE TABLE IF NOT EXISTS students (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        first_name VARCHAR NOT NULL,
+        last_name VARCHAR NOT NULL,
+        gender VARCAHR NOT NULL,
+        email VARCHAR UNIQUE NOT NULL,
+        hashed_password VARCHAR NOT NULL,
+        group_id VARCHAR,
+        birthday DATE NOT NULL,
+        exam_points int NOT NULL
+    );
+    SQL);
 }

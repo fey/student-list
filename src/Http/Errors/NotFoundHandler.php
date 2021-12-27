@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http;
+namespace App\Http\Errors;
+
+use App\Http\HandlerInterface;
 
 use function App\Functions\view;
 

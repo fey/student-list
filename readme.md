@@ -1,13 +1,14 @@
-#
+# students-list
 
 ## Prerequisites
 
-  * PHP 7.4+
-  * Postgres 10+
-  
+* PHP 8.0
+* Postgres (for production)
+* Sqlite (local setup)
+
 ## Installation
-```shell script
-$ make install
-$ make migrate
-$ make start
+
+```sh
+make install
+make start
 ```
