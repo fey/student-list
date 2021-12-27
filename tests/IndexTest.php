@@ -6,6 +6,7 @@ use App\Kernel;
 use PHPUnit\Framework\TestCase;
 
 use function App\Functions\migrate;
+use function App\Functions\seed;
 
 class IndexTest extends TestCase
 {
@@ -16,6 +17,8 @@ class IndexTest extends TestCase
         $config = ['env' => 'testing'];
 
         migrate($config['env']);
+        seed($config['env']);
+
         $this->app = new Kernel($config);
     }
 
@@ -28,5 +31,6 @@ class IndexTest extends TestCase
 
         $this->assertEquals(200, $responseHttpCode);
         $this->assertStringContainsString('Students list', $responseContent);
+        $this->assertStringContainsString('first_name 1', $responseContent);
     }
 }

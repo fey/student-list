@@ -2,7 +2,8 @@
 
 namespace App\Functions;
 
-use \PDO;
+use PDO;
+use DateTime;
 
 function array_get(array $array, $key, mixed $default = null): mixed
 {
@@ -79,4 +80,38 @@ function migrate(string $database): void
         exam_points int NOT NULL
     );
     SQL);
+}
+
+function seed(string $database): void
+{
+    $baseDir = baseDir();
+    $pdo = new PDO("sqlite:{$baseDir}/database/{$database}.sqlite3");
+    $pdo->exec('DELETE FROM students');
+
+    $birthday = new DateTime('1970-01-01');
+
+    $valuesParts = array_reduce(range(1, 10), function ($acc, $i) use ($birthday) {
+        $examPoints = rand(50, 200);
+        $attributes = [
+            "first_name ${i}",
+            "last_name ${i}",
+            "male",
+            "student${i}@test.io",
+            "ASDF123",
+            null,
+            $birthday->format('Y-m-d'),
+            "$examPoints"
+        ];
+
+        $preparedAttributes = implode(', ', array_map(fn($attribute) => "'{$attribute}'", $attributes));
+
+        return [...$acc, "($preparedAttributes)"];
+    }, []);
+
+    $joinedValuesParts = implode(",\n", $valuesParts);
+
+    $resultQuery = "INSERT INTO students
+        (first_name, last_name, gender, email, group_id, hashed_password, birthday, exam_points)
+        VALUES {$joinedValuesParts};\n";
+    $pdo->exec($resultQuery);
 }
