@@ -20,3 +20,12 @@ static-analyse:
 
 migrate:
 	php bin/migrate
+
+test:
+	composer exec phpunit
+
+test-coverage-output:
+	XDEBUG_MODE=coverage composer exec phpunit -- --coverage-text
+
+test-coverage-html:
+	XDEBUG_MODE=coverage composer exec phpunit -- --coverage-html=./tmp/report
