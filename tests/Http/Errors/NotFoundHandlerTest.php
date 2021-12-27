@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Http\Pages;
+namespace App\Tests\Http\Errors;
 
 use App\Kernel;
 use PHPUnit\Framework\TestCase;
