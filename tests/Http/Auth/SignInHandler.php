@@ -1,3 +1,3 @@
 <?php
 
-namespace App\Http\Auth;
+namespace App\Tests\Http\Auth;

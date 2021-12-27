@@ -10,6 +10,5 @@ class SignInHandler implements HandlerInterface
 {
     public function handle()
     {
-        dd(getFormData());
     }
 }

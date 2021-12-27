@@ -1,6 +1,10 @@
 <?php include('shared/head.html.php') ?>
 
 <main>
+    
+    <div class="alert alert-success" role="alert">
+      This is a success alert—check it out!
+    </div>
     <h1 class="p-5">Students list</h1>
 
     <table class="table">

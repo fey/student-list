@@ -14,8 +14,8 @@
           </div>
           <div class="mb-3">
             <label for="user_email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp">
-            <div id="emailHelp" name="user[email]" class="form-text">We'll never share your email with anyone else.</div>
+            <input type="email" name="user[email]" class="form-control" id="user_email" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
           </div>
           <div class="mb-3">
             <label for="user_password" class="form-label">Password</label>
@@ -34,13 +34,13 @@
             <input type="date" name="user[birthday]" class="form-control" id="user_birthday_date" max="2005-01-01">
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="user[gender]" id="user_gender1" checked>
+            <input class="form-check-input" type="radio" name="user[gender]" id="user_gender1" checked value="male">
             <label class="form-check-label" for="user_gender1">
               Male
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="user[gender]" id="user_gender2">
+            <input class="form-check-input" type="radio" name="user[gender]" id="user_gender2" value="female">
             <label class="form-check-label" for="user_gender2">
               Female
             </label>

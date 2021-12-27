@@ -61,6 +61,11 @@ function view(string $viewName, array $params = []): string
     return ob_get_clean();
 }
 
+function createPdo(string $dsn): PDO
+{
+    return new PDO($dsn);
+}
+
 function migrate(string $database): void
 {
     $baseDir = baseDir();

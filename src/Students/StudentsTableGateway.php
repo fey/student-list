@@ -21,4 +21,16 @@ class StudentsTableGateway
 
         return array_map(fn($studentRaw) => Student::fromArray($studentRaw), $data);
     }
+
+    public function create(array $data)
+    {
+        $query = 'INSERT INTO students
+        (first_name, last_name, gender, email, group_id, hashed_password, birthday, exam_points)
+            VALUES (:first_name, :last_name, :gender, :email, :group_id, :password, :birthday, :exam_points)
+        ';
+
+        $statement = $this->pdo->prepare($query);
+
+        $statement->execute($data);
+    }
 }

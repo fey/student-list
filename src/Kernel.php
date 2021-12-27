@@ -34,7 +34,7 @@ class Kernel
 
         $notFoundHandler = new NotFoundHandler();
 
-        $signUpHandler = new SignUpHandler();
+        $signUpHandler = new SignUpHandler($studentsTableGateway);
 
         $handlersByRoutesMap = [
             '/' => $indexHandler,
