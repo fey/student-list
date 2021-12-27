@@ -34,4 +34,4 @@ test-coverage-html:
 	XDEBUG_MODE=coverage composer exec phpunit -- --coverage-html=./tmp/report
 
 test-coverage:
-	composer exec --verbose phpunit tests -- --coverage-clover tmp/clover.xml
+	XDEBUG_MODE=coverage composer exec --verbose phpunit tests -- --coverage-clover tmp/clover.xml

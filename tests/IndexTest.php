@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 use function App\Functions\migrate;
 
-class StackTest extends TestCase
+class IndexTest extends TestCase
 {
     private Kernel $app;
 
