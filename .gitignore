@@ -1,6 +1,6 @@
 /vendor/
 **/*.log
 **/*.sqlite3
-!tmp/.keep
 tmp/*
+!tmp/.keep
 .phpunit.result.cache
