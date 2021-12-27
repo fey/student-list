@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Auth\SignUpHandler;
 use PDO;
 use App\Http\Errors\NotFoundHandler;
 use App\Http\Pages\EditHandler;
@@ -33,12 +34,15 @@ class Kernel
 
         $notFoundHandler = new NotFoundHandler();
 
+        $signUpHandler = new SignUpHandler();
+
         $handlersByRoutesMap = [
             '/' => $indexHandler,
             '/register' => $registerHandler,
             '/login' => $loginHandler,
             '/edit' => $editHandler,
             // '/logout' => fn() => new LogoutHandler(),
+            '/sign_up' => $signUpHandler,
         ];
 
         $handler = array_get($handlersByRoutesMap, getRequestPath(), $notFoundHandler);
