@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Auth;
+namespace App\Test\Http\Auth;
 
 use App\Http\HandlerInterface;
 

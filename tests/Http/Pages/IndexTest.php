@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Http\Pages;
 
 use App\Kernel;
 use PHPUnit\Framework\TestCase;
@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use function App\Functions\migrate;
 use function App\Functions\seed;
 
-class IndexTest extends TestCase
+class IndexHandlerTest extends TestCase
 {
     private Kernel $app;
 

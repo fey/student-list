@@ -10,6 +10,7 @@ class RegisterHandler implements HandlerInterface
 {
     public function handle()
     {
+        http_response_code(200);
         return view('register');
     }
 }
