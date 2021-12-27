@@ -1,7 +1,7 @@
 setup:
 	touch database/development.sqlite3
 	touch database/testing.sqlite3
-	make install
+	make install migrate seed
 
 install:
 	composer install
@@ -20,6 +20,9 @@ static-analyse:
 
 migrate:
 	php bin/migrate
+
+seed:
+	php bin/seed
 
 test:
 	composer exec phpunit
