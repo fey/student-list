@@ -21,11 +21,8 @@ jobs:
       - name: Run linter
         run: make lint
 
-      - name: Run test & publish code coverage
-        uses: paambaati/codeclimate-action@v2.6.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
         with:
-          coverageCommand: make test-coverage
-          coverageLocations: ${{github.workplace}}/tmp/clover.xml:clover
-          debug: true
+          file: tmp/clover.xml
+          fail_ci_if_error: true
