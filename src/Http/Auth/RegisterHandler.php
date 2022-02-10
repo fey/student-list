@@ -19,12 +19,14 @@ class RegisterHandler implements HandlerInterface
         };
     }
 
-    private function renderForm(){
+    private function renderForm()
+    {
         http_response_code(200);
         return view('register', ['errors' => []]);
     }
 
-    private function registerStudent(){
+    private function registerStudent()
+    {
         $formData = new RegisterForm(getFormData()['user']);
 
         $formData->validate();
