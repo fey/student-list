@@ -23,7 +23,7 @@
         </ul>
         <ul class="nav">
           <li class="nav-item"><a href="/login" class="nav-link link-dark px-2">Login</a></li>
-          <li class="nav-item"><a href="/register" class="nav-link link-dark px-2">Sign up</a></li>
+          <li class="nav-item"><a href="/register" class="nav-link link-dark px-2">Register</a></li>
           <li class="nav-item"><a href="/edit" class="nav-link link-dark px-2">Edit</a></li>
           <li class="nav-item"><a href="/logout" class="nav-link link-dark px-2">Logout</a></li>
         </ul>

@@ -63,22 +63,31 @@ include('shared/head.html.php') ?>
           </div>
           <div class="mb-3">
             <label for="user_exam_points" class="form-label">Exam Points</label>
-            <input type="number" name="user[exam_points]" class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('exam_points', $errors)]) ?>" id="user_exam_points">
+            <input
+              type="number"
+              name="user[exam_points]"
+              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('exam_points', $errors)]) ?>"
+              id="user_exam_points">
             <div class="invalid-feedback"><?= array_get($errors, 'exam_points') ?></div>
           </div>
           <div class="mb-3">
             <label for="user_birthday_date" class="form-label">Birthday Date</label>
-            <input type="date" name="user[birthday]" class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('birthday', $errors)]) ?>" id="user_birthday_date" max="2005-01-01">
+            <input type="date" name="user[birthday]" class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('birthday', $errors)]) ?>"
+            id="user_birthday_date"
+            max="2005-01-01">
             <div class="invalid-feedback"><?= array_get($errors, 'birthday') ?></div>
           </div>
           <div class="form-check">
-            <input class="<?= HtmlHelper::classNames(classes: ['form-check-input'], extras: ['is-invalid' => array_key_exists('gender', $errors)]) ?>" type="radio" name="user[gender]" id="user_gender1" value="male">
+            <input class="<?= HtmlHelper::classNames(classes: ['form-check-input'], extras: ['is-invalid' => array_key_exists('gender', $errors)]) ?>"
+            type="radio" name="user[gender]"
+            id="user_gender1" value="male">
             <label class="form-check-label" for="user_gender1">
               Male
             </label>
           </div>
           <div class="form-check">
-            <input class="<?= HtmlHelper::classNames(classes: ['form-check-input'], extras: ['is-invalid' => array_key_exists('gender', $errors)]) ?>" type="radio" name="user[gender]" id="user_gender2" value="female">
+            <input class="<?= HtmlHelper::classNames(classes: ['form-check-input'], extras: ['is-invalid' => array_key_exists('gender', $errors)]) ?>"
+            type="radio" name="user[gender]" id="user_gender2" value="female">
             <label class="form-check-label" for="user_gender2">
               Female
             </label>
