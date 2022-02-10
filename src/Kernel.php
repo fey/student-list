@@ -8,9 +8,7 @@ use App\Http\Students\UpdateStudentHandler;
 use App\Http\Students\IndexHandler;
 use App\Http\Students\EditHandler;
 use App\Http\Errors\NotFoundHandler;
-use App\Http\Auth\SignUpHandler;
 use App\Http\Auth\SignOutHandler;
-use App\Http\Auth\SignInHandler;
 use App\Http\Auth\RegisterHandler;
 use App\Http\Auth\LoginHandler;
 
@@ -36,9 +34,6 @@ class Kernel
         $editHandler = new EditHandler();
 
         $notFoundHandler = new NotFoundHandler();
-
-        $signInHandler = new SignInHandler();
-        $signUpHandler = new SignUpHandler($studentsTableGateway);
         $signOutHandler = new SignOutHandler();
 
         $updateStudentHandler = new UpdateStudentHandler();
@@ -51,8 +46,6 @@ class Kernel
             // auth
             '/register' => $registerHandler,
             '/login' => $loginHandler,
-            '/sign_in' => $signInHandler,
-            '/sign_up' => $signUpHandler,
             '/sign_out' => $signOutHandler,
         ];
 

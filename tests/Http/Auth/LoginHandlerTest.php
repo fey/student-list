@@ -9,6 +9,7 @@ class LoginHandlerTest extends HandlerTestCase
     public function testGetIndex(): void
     {
         $_SERVER['REQUEST_URI'] = '/login';
+        $_SERVER['REQUEST_METHOD'] = 'GET';
         $responseContent = $this->app->run();
 
         $responseHttpCode = http_response_code();
