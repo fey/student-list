@@ -15,7 +15,7 @@ class RegisterForm
     private $birthday;
     private $gender;
 
-    private array $errors;
+    private array $errors = [];
 
     private const MIN_AGE_YEARS = 16;
     private const GENDERS = ['male', 'female'];

@@ -31,8 +31,8 @@ class Kernel
 
         $studentsTableGateway = new StudentsTableGateway($pdo);
         $indexHandler = new IndexHandler($studentsTableGateway);
-        $registerHandler = new RegisterHandler();
-        $loginHandler = new LoginHandler();
+        $registerHandler = new RegisterHandler($studentsTableGateway);
+        $loginHandler = new LoginHandler($studentsTableGateway);
         $editHandler = new EditHandler();
 
         $notFoundHandler = new NotFoundHandler();

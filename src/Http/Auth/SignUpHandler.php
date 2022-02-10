@@ -18,7 +18,6 @@ class SignUpHandler implements HandlerInterface
         $formData = getFormData();
         $this->studentsTableGateway->create($formData['user']);
 
-        header('Location: /');
-        return '';
+
     }
 }
