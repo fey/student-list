@@ -6,7 +6,10 @@
     <arg name="parallel" value="10"/>
     <arg value="np"/>
     <arg name="extensions" value="php"/>
+    <file>bin</file>
     <file>public</file>
+    <file>src</file>
+    <file>tests</file>
     <rule ref="PSR12">
     </rule>
     <rule ref="Generic.ControlStructures.InlineControlStructure">

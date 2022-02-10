@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Pages;
+namespace App\Http\Session;
 
 use App\Http\HandlerInterface;
 
 use function App\Functions\view;
 
-class LoginHandler implements HandlerInterface
+class EditHandler implements HandlerInterface
 {
     public function handle()
     {
         http_response_code(200);
-        return view('login');
+        return view('edit');
     }
 }

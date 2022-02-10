@@ -4,7 +4,7 @@ namespace App\Tests\Http\Auth;
 
 use PDO;
 use App\Kernel;
-use PHPUnit\Framework\TestCase;
+use App\Tests\HandlerTestCase;
 
 use function App\Functions\baseDir;
 use function App\Functions\createPdo;
@@ -12,9 +12,8 @@ use function App\Functions\getFormData;
 use function App\Functions\migrate;
 use function App\Functions\seed;
 
-class NotFoundHandlerTest extends TestCase
+class NotFoundHandlerTest extends HandlerTestCase
 {
-    private Kernel $app;
     private PDO $pdo;
 
     protected function setUp(): void

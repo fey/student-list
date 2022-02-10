@@ -3,25 +3,14 @@
 namespace App\Tests\Http\Errors;
 
 use App\Kernel;
+use App\Tests\HandlerTestCase;
 use PHPUnit\Framework\TestCase;
 
 use function App\Functions\migrate;
 use function App\Functions\seed;
 
-class NotFoundHandlerTest extends TestCase
+class NotFoundHandlerTest extends HandlerTestCase
 {
-    private Kernel $app;
-
-    protected function setUp(): void
-    {
-        $config = ['env' => 'testing'];
-
-        migrate($config['env']);
-        seed($config['env']);
-
-        $this->app = new Kernel($config);
-    }
-
     public function testGetIndex(): void
     {
         $_SERVER['REQUEST_URI'] = '/asd123';

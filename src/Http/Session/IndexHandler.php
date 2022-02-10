@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Pages;
+namespace App\Http\Session;
 
 use App\Http\HandlerInterface;
 use App\Students\StudentsTableGateway;

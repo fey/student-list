@@ -3,8 +3,8 @@
 namespace App\Http\Auth;
 
 use App\Http\HandlerInterface;
-
 use App\Students\StudentsTableGateway;
+
 use function App\Functions\getFormData;
 
 class SignUpHandler implements HandlerInterface

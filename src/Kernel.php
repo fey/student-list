@@ -5,10 +5,10 @@ namespace App;
 use App\Http\Auth\SignUpHandler;
 use PDO;
 use App\Http\Errors\NotFoundHandler;
-use App\Http\Pages\EditHandler;
-use App\Http\Pages\IndexHandler;
-use App\Http\Pages\LoginHandler;
-use App\Http\Pages\RegisterHandler;
+use App\Http\Session\EditHandler;
+use App\Http\Session\IndexHandler;
+use App\Http\Session\LoginHandler;
+use App\Http\Session\RegisterHandler;
 use App\Students\StudentsTableGateway;
 
 use function App\Functions\array_get;
