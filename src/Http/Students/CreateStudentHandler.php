@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Auth;
+namespace App\Http\Students;
 
 use App\Http\HandlerInterface;
 
-class UpdateProfileHandler implements HandlerInterface
+class CreateStudentHandler implements HandlerInterface
 {
     public function handle()
     {

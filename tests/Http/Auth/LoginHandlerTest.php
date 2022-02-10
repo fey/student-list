@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Http\Session;
+namespace App\Tests\Http\Auth;
 
 use App\Tests\HandlerTestCase;
 

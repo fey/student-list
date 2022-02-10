@@ -2,14 +2,17 @@
 
 namespace App;
 
-use App\Http\Auth\SignUpHandler;
 use PDO;
-use App\Http\Errors\NotFoundHandler;
-use App\Http\Session\EditHandler;
-use App\Http\Session\IndexHandler;
-use App\Http\Session\LoginHandler;
-use App\Http\Session\RegisterHandler;
 use App\Students\StudentsTableGateway;
+use App\Http\Students\UpdateStudentHandler;
+use App\Http\Students\IndexHandler;
+use App\Http\Students\EditHandler;
+use App\Http\Errors\NotFoundHandler;
+use App\Http\Auth\SignUpHandler;
+use App\Http\Auth\SignOutHandler;
+use App\Http\Auth\SignInHandler;
+use App\Http\Auth\RegisterHandler;
+use App\Http\Auth\LoginHandler;
 
 use function App\Functions\array_get;
 use function App\Functions\getRequestPath;
@@ -34,15 +37,23 @@ class Kernel
 
         $notFoundHandler = new NotFoundHandler();
 
+        $signInHandler = new SignInHandler();
         $signUpHandler = new SignUpHandler($studentsTableGateway);
+        $signOutHandler = new SignOutHandler();
+
+        $updateStudentHandler = new UpdateStudentHandler();
 
         $handlersByRoutesMap = [
+            // students
             '/' => $indexHandler,
+            '/edit' => $editHandler,
+            '/students/update' => $updateStudentHandler,
+            // auth
             '/register' => $registerHandler,
             '/login' => $loginHandler,
-            '/edit' => $editHandler,
-            // '/logout' => fn() => new LogoutHandler(),
+            '/sign_in' => $signInHandler,
             '/sign_up' => $signUpHandler,
+            '/sign_out' => $signOutHandler,
         ];
 
         $handler = array_get($handlersByRoutesMap, getRequestPath(), $notFoundHandler);
