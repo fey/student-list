@@ -8,6 +8,7 @@ class RegisterHandlerTest extends HandlerTestCase
 {
     public function testGetIndex(): void
     {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/register';
         $responseContent = $this->app->run();
 
