@@ -18,8 +18,12 @@ class Auth
         return array_get($_SESSION, 'user_id');
     }
 
-    public static function login(Student $student): void
+    public static function login(?Student $student): void
     {
+        if (!$student) {
+            return;
+        }
+
         $_SESSION['user_id'] = $student->id;
     }
 
