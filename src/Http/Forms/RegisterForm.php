@@ -3,6 +3,7 @@
 namespace App\Http\Forms;
 
 use DateTime;
+use function App\Functions\array_get;
 
 class RegisterForm
 {
@@ -22,14 +23,14 @@ class RegisterForm
 
     public function __construct(array $data)
     {
-        $this->firstName = (string)$data['first_name'];
-        $this->lastName = (string)$data['last_name'];
-        $this->email = (string)$data['email'];
-        $this->password = (string)$data['password'];
-        $this->groupId = (string)$data['group_id'];
-        $this->examPoints = (int)$data['exam_points'];
-        $this->birthday = new DateTime($data['birthday']);
-        $this->gender = (string)($data['gender'] ?? '');
+        $this->firstName = array_get($data, 'first_name');
+        $this->lastName = array_get($data, 'last_name');
+        $this->email = array_get($data, 'email');
+        $this->password = array_get($data, 'password');
+        $this->groupId = array_get($data, 'group_id');
+        $this->examPoints = array_get($data, 'exam_points');
+        $this->birthday = new DateTime(array_get($data, 'birthday'));
+        $this->gender = array_get($data, 'gender');
     }
 
     public function validate(): void

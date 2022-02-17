@@ -33,11 +33,12 @@ class RegisterHandler implements HandlerInterface
 
     private function registerStudent()
     {
-        $formData = new RegisterForm(getFormData()['user']);
+        $formData = new RegisterForm(getFormData());
 
         $formData->validate();
 
         if (!$formData->isValid()) {
+            http_response_code(422);
             return view('register', ['errors' => $formData->errors()]);
         }
 

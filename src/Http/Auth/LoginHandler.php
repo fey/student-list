@@ -34,6 +34,7 @@ class LoginHandler implements HandlerInterface
     {
         $email = array_get(getFormData(), 'email');
 
+        // TODO: add handle with password
         $student = $this->studentsTableGateway->findByEmail($email);
 
         Auth::login($student);

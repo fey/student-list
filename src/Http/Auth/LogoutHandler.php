@@ -11,5 +11,7 @@ class LogoutHandler implements HandlerInterface
     {
         Auth::logout();
         header('Location: /');
+
+        return '';
     }
 }
