@@ -22,10 +22,21 @@
           <li class="nav-item"><a href="/" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
         </ul>
         <ul class="nav">
-          <li class="nav-item"><a href="/login" class="nav-link link-dark px-2">Login</a></li>
-          <li class="nav-item"><a href="/register" class="nav-link link-dark px-2">Register</a></li>
-          <li class="nav-item"><a href="/edit" class="nav-link link-dark px-2">Edit</a></li>
-          <li class="nav-item"><a href="/logout" class="nav-link link-dark px-2">Logout</a></li>
+          <?php if (App\Http\Auth::isGuest()): ?>
+            <li class="nav-item"><a href="/login" class="nav-link link-dark px-2">Login</a></li>
+            <li class="nav-item"><a href="/register" class="nav-link link-dark px-2">Register</a></li>
+            <?php else: ?>
+              <li class="nav-item">
+                <span class="nav-link text-muted">ID: <?= App\Http\Auth::id() ?></span>
+              </li>
+              <li class="nav-item"><a href="/edit" class="nav-link link-dark px-2">Edit</a></li>
+              <li class="nav-item">
+                <a href="/logout" class="nav-link link-dark px-2" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  Logout
+                  <form class="d-none" action="/logout" id="logout-form" method="POST"></form>
+                </a>
+              </li>
+          <?php endif; ?>
         </ul>
       </div>
     </nav>

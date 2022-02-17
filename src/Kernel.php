@@ -8,7 +8,7 @@ use App\Http\Students\UpdateStudentHandler;
 use App\Http\Students\IndexHandler;
 use App\Http\Students\EditHandler;
 use App\Http\Errors\NotFoundHandler;
-use App\Http\Auth\SignOutHandler;
+use App\Http\Auth\LogoutHandler;
 use App\Http\Auth\RegisterHandler;
 use App\Http\Auth\LoginHandler;
 
@@ -34,7 +34,7 @@ class Kernel
         $editHandler = new EditHandler();
 
         $notFoundHandler = new NotFoundHandler();
-        $signOutHandler = new SignOutHandler();
+        $LogoutHandler = new LogoutHandler();
 
         $updateStudentHandler = new UpdateStudentHandler();
 
@@ -46,11 +46,12 @@ class Kernel
             // auth
             '/register' => $registerHandler,
             '/login' => $loginHandler,
-            '/sign_out' => $signOutHandler,
+            '/logout' => $LogoutHandler,
         ];
 
         $handler = array_get($handlersByRoutesMap, getRequestPath(), $notFoundHandler);
 
+        session_start();
         return $handler->handle();
     }
 }

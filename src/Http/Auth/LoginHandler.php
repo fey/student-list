@@ -2,6 +2,7 @@
 
 namespace App\Http\Auth;
 
+use App\Http\Auth;
 use App\Http\HandlerInterface;
 use App\Students\StudentsTableGateway;
 
@@ -35,9 +36,7 @@ class LoginHandler implements HandlerInterface
 
         $student = $this->studentsTableGateway->findByEmail($email);
 
-        session_start();
-        $_SESSION['student_id'] = $student->id;
-
+        Auth::login($student);
         header('Location: /');
         return '';
     }

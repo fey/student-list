@@ -2,6 +2,7 @@
 
 namespace App\Http\Auth;
 
+use App\Http\Auth;
 use App\Http\Forms\RegisterForm;
 use App\Http\HandlerInterface;
 use App\Students\Student;
@@ -57,9 +58,8 @@ class RegisterHandler implements HandlerInterface
         $student = $this->studentsTableGateway->create($student->toArray());
 
         $createdStudent = $this->studentsTableGateway->findByEmail($formData->getEmail());
+        Auth::login($createdStudent);
         header('Location: /');
-        session_start();
-        $_SESSION['student_id'] = $createdStudent->id;
         return '';
     }
 }
