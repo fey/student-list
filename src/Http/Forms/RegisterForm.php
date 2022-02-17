@@ -3,6 +3,7 @@
 namespace App\Http\Forms;
 
 use DateTime;
+
 use function App\Functions\array_get;
 
 class RegisterForm
