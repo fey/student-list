@@ -1,12 +1,10 @@
 {
     "name": "feycot/student-list",
     "type": "project",
-    "authors": [
-        {
-            "name": "feycot",
-            "email": "feycot@gmail.com"
-        }
-    ],
+    "authors": [{
+        "name": "feycot",
+        "email": "feycot@gmail.com"
+    }],
     "autoload": {
         "psr-4": {
             "App\\": "src/"
@@ -31,6 +29,14 @@
         "squizlabs/php_codesniffer": "*",
         "phpstan/phpstan": "^1.2",
         "symfony/var-dumper": "^6.0",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "brainmaestro/composer-git-hooks": "^2.8"
+    },
+    "extra": {
+        "hooks": {
+            "pre-push": [
+                "make lint"
+            ]
+        }
     }
 }
