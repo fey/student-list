@@ -2,6 +2,7 @@ setup:
 	touch database/development.sqlite3
 	touch database/testing.sqlite3
 	make install migrate seed
+	make setup-git-hooks
 
 install:
 	composer install
@@ -14,6 +15,9 @@ lint:
 
 lint-fix:
 	composer exec phpcbf
+
+setup-git-hooks:
+	composer exec cghooks update
 
 static-analyse:
 	composer exec phpstan analyse
