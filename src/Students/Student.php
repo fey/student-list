@@ -48,4 +48,17 @@ class Student
             $data['exam_points']
         );
     }
+
+    public function is(?Student $otherStudent): bool
+    {
+        if ($otherStudent === null) {
+            return false;
+        }
+
+        if ($otherStudent->id === null) {
+            return false;
+        }
+
+        return $this->id === $otherStudent->id;
+    }
 }

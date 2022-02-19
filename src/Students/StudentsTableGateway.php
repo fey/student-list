@@ -2,6 +2,7 @@
 
 namespace App\Students;
 
+use DomainException;
 use PDO;
 
 class StudentsTableGateway
@@ -48,5 +49,23 @@ class StudentsTableGateway
         $statement = $this->pdo->prepare($query);
         unset($data['id']); // FIXME
         $statement->execute($data);
+    }
+
+    public function getById(int $id): Student
+    {
+        $query = 'SELECT * FROM students WHERE id = :id';
+
+        $statement = $this->pdo->prepare($query);
+        $statement->bindParam(':id', $id);
+
+        $statement->execute();
+
+        $data = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!$data) {
+            throw new DomainException('Not found');
+        }
+
+        return Student::fromArray($data);
     }
 }

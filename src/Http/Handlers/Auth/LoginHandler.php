@@ -2,6 +2,7 @@
 
 namespace App\Http\Handlers\Auth;
 
+use App\Hasher;
 use App\Http\Auth;
 use App\Http\Forms\LoginForm;
 use App\Http\Handlers\HandlerInterface;
@@ -12,8 +13,10 @@ use function App\Functions\view;
 
 class LoginHandler implements HandlerInterface
 {
-    public function __construct(private StudentsTableGateway $studentsTableGateway)
-    {
+    public function __construct(
+        private StudentsTableGateway $studentsTableGateway,
+        private Hasher $hasher
+    ) {
     }
 
     public function handle()
@@ -55,7 +58,7 @@ class LoginHandler implements HandlerInterface
             ]);
         }
 
-        if (!password_verify($form->getPassword(), $student->hashedPassword)) {
+        if (!$this->hasher->verifyPassword($form->getPassword(), $student->hashedPassword)) {
             http_response_code(422);
             return view('login', [
                 'errors' => $form->errors(),

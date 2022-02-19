@@ -27,10 +27,12 @@ class Kernel
         $pdo = new PDO("sqlite:{$baseDir}/database/{$this->config['env']}.sqlite3");
 
         $studentsTableGateway = new StudentsTableGateway($pdo);
+        $passwordHasher = Hasher::build();
+
         $indexHandler = new IndexHandler($studentsTableGateway);
-        $registerHandler = new RegisterHandler($studentsTableGateway);
-        $loginHandler = new LoginHandler($studentsTableGateway);
-        $editHandler = new EditHandler($studentsTableGateway);
+        $registerHandler = new RegisterHandler($studentsTableGateway, $passwordHasher);
+        $loginHandler = new LoginHandler($studentsTableGateway, $passwordHasher);
+        $editHandler = new EditHandler($studentsTableGateway, $passwordHasher);
 
         $notFoundHandler = new NotFoundHandler();
         $LogoutHandler = new LogoutHandler();

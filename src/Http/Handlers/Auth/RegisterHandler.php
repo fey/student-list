@@ -2,6 +2,7 @@
 
 namespace App\Http\Handlers\Auth;
 
+use App\Hasher;
 use App\Http\Auth;
 use App\Http\Forms\RegisterForm;
 use App\Http\Handlers\HandlerInterface;
@@ -14,8 +15,10 @@ use function App\Functions\view;
 
 class RegisterHandler implements HandlerInterface
 {
-    public function __construct(private StudentsTableGateway $studentsTableGateway)
-    {
+    public function __construct(
+        private StudentsTableGateway $studentsTableGateway,
+        private Hasher $hasher
+    ) {
     }
 
     public function handle()
@@ -44,7 +47,7 @@ class RegisterHandler implements HandlerInterface
             return view('register', ['errors' => $form->errors()]);
         }
 
-        $hashedPassword = password_hash($form->getPassword(), PASSWORD_BCRYPT);
+        $hashedPassword = $this->hasher->hashPassword($form->getPassword(), PASSWORD_BCRYPT);
 
         $student = new Student(
             null,
