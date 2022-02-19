@@ -33,7 +33,7 @@ class LoginHandler implements HandlerInterface
 
     private function signIn()
     {
-        $data= getFormData();
+        $data = getFormData();
 
         $form = new LoginForm($data);
 
@@ -63,7 +63,7 @@ class LoginHandler implements HandlerInterface
                 'flash' => [
                     'error' => 'User not found or password invalid'
                 ],
-        ]);
+            ]);
         }
 
         Auth::login($student);

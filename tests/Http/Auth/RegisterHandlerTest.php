@@ -25,14 +25,16 @@ class RegisterHandlerTest extends HandlerTestCase
         $_SERVER['REQUEST_METHOD'] = 'POST';
 
         $_POST = [
-            'first_name' => 'Ivan',
-            'last_name' => 'Ivanod',
-            'email' => 'test@email.com',
-            'password' => 'password123',
-            'group_id' => 'qwe123',
-            'birthday' => '01-01-1970',
-            'gender' => 'male',
-            'exam_points' => '100',
+            'user' => [
+                'first_name' => 'Ivan',
+                'last_name' => 'Ivanod',
+                'email' => 'test@email.com',
+                'password' => 'password123',
+                'group_id' => 'qwe123',
+                'birthday' => '01-01-1970',
+                'gender' => 'male',
+                'exam_points' => '100',
+            ]
         ];
 
         $this->app->run();
