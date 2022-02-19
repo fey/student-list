@@ -2,6 +2,7 @@
 
 namespace App\Functions;
 
+use App\Hasher;
 use PDO;
 use DateTime;
 
@@ -94,8 +95,9 @@ function seed(string $database): void
     $pdo->exec('DELETE FROM students');
 
     $birthday = new DateTime('1970-01-01');
+    $passwordHasher = Hasher::build();
 
-    $valuesParts = array_reduce(range(1, 10), function ($acc, $i) use ($birthday) {
+    $valuesParts = array_reduce(range(1, 10), function ($acc, $i) use ($birthday, $passwordHasher) {
         $examPoints = rand(50, 200);
         $attributes = [
             "first_name ${i}",
@@ -103,9 +105,9 @@ function seed(string $database): void
             "male",
             "student${i}@test.io",
             "ASDF123",
-            null,
+            $passwordHasher->hashPassword('password'),
             $birthday->format('Y-m-d'),
-            "$examPoints"
+            "$examPoints",
         ];
 
         $preparedAttributes = implode(', ', array_map(fn($attribute) => "'{$attribute}'", $attributes));

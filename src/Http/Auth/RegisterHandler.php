@@ -8,6 +8,7 @@ use App\Http\HandlerInterface;
 use App\Students\Student;
 use App\Students\StudentsTableGateway;
 
+use function App\Functions\array_get;
 use function App\Functions\getFormData;
 use function App\Functions\view;
 
@@ -33,32 +34,33 @@ class RegisterHandler implements HandlerInterface
 
     private function registerStudent()
     {
-        $formData = new RegisterForm(getFormData());
+        $formData = array_get(getFormData(), 'user', []);
+        $form = new RegisterForm($formData);
 
-        $formData->validate();
+        $form->validate();
 
-        if (!$formData->isValid()) {
+        if (!$form->isValid()) {
             http_response_code(422);
-            return view('register', ['errors' => $formData->errors()]);
+            return view('register', ['errors' => $form->errors()]);
         }
 
-        $hashedPassword = password_hash($formData->getPassword(), PASSWORD_BCRYPT);
+        $hashedPassword = password_hash($form->getPassword(), PASSWORD_BCRYPT);
 
         $student = new Student(
             null,
-            $formData->getFirstName(),
-            $formData->getLastName(),
-            $formData->getEmail(),
+            $form->getFirstName(),
+            $form->getLastName(),
+            $form->getEmail(),
             $hashedPassword,
-            $formData->getGroupId(),
-            $formData->getBirthday(),
-            $formData->getGender(),
-            $formData->getExamPoints()
+            $form->getGroupId(),
+            $form->getBirthday(),
+            $form->getGender(),
+            $form->getExamPoints()
         );
 
         $student = $this->studentsTableGateway->create($student->toArray());
 
-        $createdStudent = $this->studentsTableGateway->findByEmail($formData->getEmail());
+        $createdStudent = $this->studentsTableGateway->findByEmail($form->getEmail());
         Auth::login($createdStudent);
         header('Location: /');
         return '';

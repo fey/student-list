@@ -3,6 +3,7 @@
 namespace App\Http\Auth;
 
 use App\Http\Auth;
+use App\Http\Forms\LoginForm;
 use App\Http\HandlerInterface;
 use App\Students\StudentsTableGateway;
 
@@ -32,10 +33,38 @@ class LoginHandler implements HandlerInterface
 
     private function signIn()
     {
-        $email = array_get(getFormData(), 'email');
+        $data= getFormData();
+
+        $form = new LoginForm($data);
+
+        $form->validate();
+
+        if (!$form->isValid()) {
+            http_response_code(422);
+            return view('login', ['errors' => $form->errors()]);
+        }
 
         // TODO: add handle with password
-        $student = $this->studentsTableGateway->findByEmail($email);
+        $student = $this->studentsTableGateway->findByEmail($form->getEmail());
+
+        if (!$student) {
+            http_response_code(422);
+            return view('login', [
+                'errors' => $form->errors(), 'flash' => [
+                    'error' => 'User not found or password invalid'
+                ],
+            ]);
+        }
+
+        if (!password_verify($form->getPassword(), $student->hashedPassword)) {
+            http_response_code(422);
+            return view('login', [
+                'errors' => $form->errors(),
+                'flash' => [
+                    'error' => 'User not found or password invalid'
+                ],
+        ]);
+        }
 
         Auth::login($student);
         header('Location: /');

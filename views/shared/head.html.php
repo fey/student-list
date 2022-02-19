@@ -41,3 +41,15 @@
       </div>
     </nav>
   </header>
+<? if (isset($flash)): ?>
+  <? if (App\Functions\array_get($flash, 'success')): ?>
+    <div class="alert alert-success" role="alert">
+        <?= App\Functions\array_get($flash, 'success'); ?>
+    </div>
+  <? endif; ?>
+  <? if (App\Functions\array_get($flash, 'error')): ?>
+    <div class="alert alert-danger" role="alert">
+        <?= App\Functions\array_get($flash, 'error'); ?>
+    </div>
+  <? endif; ?>
+<? endif; ?>
