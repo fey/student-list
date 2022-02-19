@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Http\Students;
+namespace App\Tests\Http\Handlers;
 
 use App\Tests\HandlerTestCase;
 

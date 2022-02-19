@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Auth;
+namespace App\Http\Handlers\Auth;
 
 use App\Http\Auth;
-use App\Http\HandlerInterface;
+use App\Http\Handlers\HandlerInterface;
 
 class LogoutHandler implements HandlerInterface
 {

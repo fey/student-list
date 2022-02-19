@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Students;
+namespace App\Http\Handlers;
 
-use App\Http\HandlerInterface;
+use App\Http\Handlers\HandlerInterface;
 use App\Students\StudentsTableGateway;
 
 use function App\Functions\view;

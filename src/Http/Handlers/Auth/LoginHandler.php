@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Auth;
+namespace App\Http\Handlers\Auth;
 
 use App\Http\Auth;
 use App\Http\Forms\LoginForm;
-use App\Http\HandlerInterface;
+use App\Http\Handlers\HandlerInterface;
 use App\Students\StudentsTableGateway;
 
-use function App\Functions\array_get;
 use function App\Functions\getFormData;
 use function App\Functions\view;
 

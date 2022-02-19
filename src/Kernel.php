@@ -4,13 +4,12 @@ namespace App;
 
 use PDO;
 use App\Students\StudentsTableGateway;
-use App\Http\Students\UpdateStudentHandler;
-use App\Http\Students\IndexHandler;
-use App\Http\Students\EditHandler;
-use App\Http\Errors\NotFoundHandler;
-use App\Http\Auth\LogoutHandler;
-use App\Http\Auth\RegisterHandler;
-use App\Http\Auth\LoginHandler;
+use App\Http\Handlers\IndexHandler;
+use App\Http\Handlers\EditHandler;
+use App\Http\Handlers\Errors\NotFoundHandler;
+use App\Http\Handlers\Auth\LogoutHandler;
+use App\Http\Handlers\Auth\RegisterHandler;
+use App\Http\Handlers\Auth\LoginHandler;
 
 use function App\Functions\array_get;
 use function App\Functions\getRequestPath;
@@ -31,18 +30,16 @@ class Kernel
         $indexHandler = new IndexHandler($studentsTableGateway);
         $registerHandler = new RegisterHandler($studentsTableGateway);
         $loginHandler = new LoginHandler($studentsTableGateway);
-        $editHandler = new EditHandler();
+        $editHandler = new EditHandler($studentsTableGateway);
 
         $notFoundHandler = new NotFoundHandler();
         $LogoutHandler = new LogoutHandler();
-
-        $updateStudentHandler = new UpdateStudentHandler();
 
         $handlersByRoutesMap = [
             // students
             '/' => $indexHandler,
             '/edit' => $editHandler,
-            '/students/update' => $updateStudentHandler,
+
             // auth
             '/register' => $registerHandler,
             '/login' => $loginHandler,

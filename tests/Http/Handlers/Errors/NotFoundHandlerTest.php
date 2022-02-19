@@ -1,13 +1,8 @@
 <?php
 
-namespace App\Tests\Http\Errors;
+namespace App\Tests\Http\Handlers\Errors;
 
-use App\Kernel;
 use App\Tests\HandlerTestCase;
-use PHPUnit\Framework\TestCase;
-
-use function App\Functions\migrate;
-use function App\Functions\seed;
 
 class NotFoundHandlerTest extends HandlerTestCase
 {
