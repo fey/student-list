@@ -40,7 +40,8 @@ class EditHandler implements HandlerInterface
 
         http_response_code(200);
         return view('edit', [
-            'student' => $student, 'errors' => []
+            'errors' => [],
+            'form' => new EditForm($student->toArray()),
         ]);
     }
 
@@ -56,7 +57,11 @@ class EditHandler implements HandlerInterface
 
         if (!$form->isValid()) {
             http_response_code(422);
-            return view('edit', ['student' => $student, 'errors' => $form->errors()]);
+            return view('edit', [
+                'errors' => $form->errors(),
+                'form' => $form,
+
+            ]);
         }
 
 
@@ -64,16 +69,10 @@ class EditHandler implements HandlerInterface
             http_response_code(422);
             return view('edit', [
                 'errors' => $form->errors(),
+                'form' => $form,
                 'flash' => [
                     'error' => 'Email address is already used by another'
                 ]
-            ]);
-        }
-
-        if (!password_verify($form->getPassword(), $student->hashedPassword)) {
-            http_response_code(422);
-            return view('edit', [
-                'errors' => $form->errors()
             ]);
         }
 

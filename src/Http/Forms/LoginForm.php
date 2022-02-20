@@ -10,7 +10,7 @@ class LoginForm extends Form
     private string $password;
     private string $email;
 
-    public function __construct(array $data)
+    public function __construct(array $data = [])
     {
         $this->email = sanitize(array_get($data, 'email'));
         $this->password = sanitize(array_get($data, 'password'));

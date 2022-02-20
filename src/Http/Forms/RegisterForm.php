@@ -21,7 +21,7 @@ class RegisterForm extends Form
     private const MIN_AGE_YEARS = 16;
     private const GENDERS = ['male', 'female'];
 
-    public function __construct(array $data)
+    public function __construct(array $data = [])
     {
         $this->firstName = sanitize(array_get($data, 'first_name'));
         $this->lastName = sanitize(array_get($data, 'last_name'));

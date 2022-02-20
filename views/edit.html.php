@@ -5,6 +5,7 @@ use App\Support\HtmlHelper;
 use function App\Functions\array_get;
 /**
  * @var \App\Students\Student $student
+ * @var \App\Http\Forms\EditForm $form
  */
 ?>
 
@@ -22,7 +23,7 @@ use function App\Functions\array_get;
               <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('first_name', $errors)]) ?>"
               id="user_first_name"
               aria-describedby="first_name_help"
-              value="<?= $student->firstName ?>"
+              value="<?= $form->getFirstName() ?>"
               >
             <div class="invalid-feedback"><?= array_get($errors, 'first_name') ?></div>
           </div>
@@ -34,7 +35,7 @@ use function App\Functions\array_get;
               <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('last_name', $errors)]) ?>"
               id="user_last_name"
               aria-describedby="first_name_help"
-              value="<?= $student->lastName ?>"
+              value="<?= $form->getLastName() ?>"
             >
             <div class="invalid-feedback"><?= array_get($errors, 'last_name') ?></div>
           </div>
@@ -46,7 +47,7 @@ use function App\Functions\array_get;
               <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('email', $errors)]) ?>"
               id="user_email"
               aria-describedby="emailHelp"
-              value="<?= $student->email ?>"
+              value="<?= $form->getEmail() ?>"
             >
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             <div class="invalid-feedback"><?= array_get($errors, 'email') ?></div>
@@ -68,7 +69,7 @@ use function App\Functions\array_get;
               name="user[group_id]"
               <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('group_id', $errors)]) ?>"
               id="user_group_id"
-              value="<?= $student->groupId ?>"
+              value="<?= $form->getGroupId() ?>"
             >
             <div class="invalid-feedback"><?= array_get($errors, 'group_id') ?></div>
           </div>
@@ -79,7 +80,7 @@ use function App\Functions\array_get;
               name="user[exam_points]"
               <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('exam_points', $errors)]) ?>"
               id="user_exam_points"
-              value="<?= $student->examPoints ?>"
+              value="<?= $form->getExamPoints() ?>"
             >
             <div class="invalid-feedback"><?= array_get($errors, 'exam_points') ?></div>
           </div>
@@ -88,7 +89,7 @@ use function App\Functions\array_get;
             <input type="date" name="user[birthday]" <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('birthday', $errors)]) ?>"
             id="user_birthday_date"
             max="2005-01-01"
-            value="<?= $student->birthday->format('Y-m-d') ?>"
+            value="<?= $form->getBirthday()->format('Y-m-d') ?>"
           >
             <div class="invalid-feedback"><?= array_get($errors, 'birthday') ?></div>
           </div>
@@ -99,7 +100,7 @@ use function App\Functions\array_get;
               name="user[gender]"
               id="user_gender1"
               value="male"
-              <?= $student->gender == 'male' ? 'checked' : '' ?>
+              <?= $form->getGender() == 'male' ? 'checked' : '' ?>
             >
             <label class="form-check-label" for="user_gender1">
               Male
@@ -112,7 +113,7 @@ use function App\Functions\array_get;
               name="user[gender]"
               id="user_gender2"
               value="female"
-              <?= $student->gender == 'female' ? 'checked' : '' ?>
+              <?= $form->getGender() == 'female' ? 'checked' : '' ?>
             >
             <label class="form-check-label" for="user_gender2">
               Female

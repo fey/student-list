@@ -32,7 +32,7 @@ class RegisterHandler implements HandlerInterface
     private function renderForm()
     {
         http_response_code(200);
-        return view('register', ['errors' => [], 'input' => new RegisterForm([])]);
+        return view('register', ['errors' => [], 'form' => new RegisterForm([])]);
     }
 
     private function registerStudent()
@@ -44,7 +44,7 @@ class RegisterHandler implements HandlerInterface
 
         if (!$form->isValid()) {
             http_response_code(422);
-            return view('register', ['errors' => $form->errors(), 'input' => $form]);
+            return view('register', ['errors' => $form->errors(), 'form' => $form]);
         }
 
         $hashedPassword = $this->hasher->hashPassword($form->getPassword());
@@ -65,7 +65,7 @@ class RegisterHandler implements HandlerInterface
             http_response_code(422);
             return view('register', [
                 'errors' => $form->errors(),
-                'input' => $form,
+                'form' => $form,
                 'flash' => [
                     'error' => 'Email address is already used by another'
                 ]

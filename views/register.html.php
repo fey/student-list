@@ -5,7 +5,7 @@ use App\Support\HtmlHelper;
 use function App\Functions\array_get;
 
 /**
- * @var \App\Http\Forms\RegisterForm $input
+ * @var \App\Http\Forms\RegisterForm $form
  */
 
 include('shared/head.html.php') ?>
@@ -22,7 +22,7 @@ include('shared/head.html.php') ?>
               <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('first_name', $errors)]) ?>"
               id="user_first_name"
               aria-describedby="first_name_help"
-              value="<?= $input->getFirstName() ?>"
+              value="<?= $form->getFirstName() ?>"
               >
             <div class="invalid-feedback"><?= array_get($errors, 'first_name') ?></div>
           </div>
@@ -34,7 +34,7 @@ include('shared/head.html.php') ?>
               <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('last_name', $errors)]) ?>"
               id="user_last_name"
               aria-describedby="first_name_help"
-              value="<?= $input->getLastName() ?>"
+              value="<?= $form->getLastName() ?>"
             >
             <div class="invalid-feedback"><?= array_get($errors, 'last_name') ?></div>
           </div>
@@ -46,7 +46,7 @@ include('shared/head.html.php') ?>
               <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('email', $errors)]) ?>"
               id="user_email"
               aria-describedby="emailHelp"
-              value="<?= $input->getEmail() ?>"
+              value="<?= $form->getEmail() ?>"
             >
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             <div class="invalid-feedback"><?= array_get($errors, 'email') ?></div>
@@ -68,7 +68,7 @@ include('shared/head.html.php') ?>
               name="user[group_id]"
               <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('group_id', $errors)]) ?>"
               id="user_group_id"
-              value="<?= $input->getGroupId() ?>"
+              value="<?= $form->getGroupId() ?>"
             >
             <div class="invalid-feedback"><?= array_get($errors, 'group_id') ?></div>
           </div>
@@ -79,7 +79,7 @@ include('shared/head.html.php') ?>
               name="user[exam_points]"
               <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('exam_points', $errors)]) ?>"
               id="user_exam_points"
-              value="<?= $input->getExamPoints() ?>"
+              value="<?= $form->getExamPoints() ?>"
             >
             <div class="invalid-feedback"><?= array_get($errors, 'exam_points') ?></div>
           </div>
@@ -88,7 +88,7 @@ include('shared/head.html.php') ?>
             <input type="date" name="user[birthday]" <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('birthday', $errors)]) ?>"
             id="user_birthday_date"
             max="2005-01-01"
-            value="<?= $input->getBirthday()->format('Y-m-d') ?>"
+            value="<?= $form->getBirthday()->format('Y-m-d') ?>"
             >
             <div class="invalid-feedback"><?= array_get($errors, 'birthday') ?></div>
           </div>
@@ -96,7 +96,7 @@ include('shared/head.html.php') ?>
             <input <?= HtmlHelper::class(['form-control-input', 'is-invalid' => array_key_exists('gender', $errors)]) ?>"
             type="radio" name="user[gender]"
             id="user_gender1" value="male"
-            <?= $input->getGender() === 'male' ? 'checked' : '' ?>
+            <?= $form->getGender() === 'male' ? 'checked' : '' ?>
             >
             <label class="form-check-label" for="user_gender1">
               Male
@@ -105,7 +105,7 @@ include('shared/head.html.php') ?>
           <div class="form-check">
             <input <?= HtmlHelper::class(['form-control-input', 'is-invalid' => array_key_exists('gender', $errors)]) ?>"
             type="radio" name="user[gender]" id="user_gender2" value="female"
-            <?= $input->getGender() === 'female' ? 'checked' : '' ?>
+            <?= $form->getGender() === 'female' ? 'checked' : '' ?>
             >
             <label class="form-check-label" for="user_gender2">
               Female

@@ -21,14 +21,14 @@ class EditForm extends Form
     private const MIN_AGE_YEARS = 16;
     private const GENDERS = ['male', 'female'];
 
-    public function __construct(array $data)
+    public function __construct(array $data = [])
     {
         $this->firstName = sanitize(array_get($data, 'first_name'));
         $this->lastName = sanitize(array_get($data, 'last_name'));
         $this->email = trim(sanitize(array_get($data, 'email')));
         $this->password = strtolower(sanitize(array_get($data, 'password')));
         $this->groupId = strtolower(sanitize(array_get($data, 'group_id')));
-        $this->examPoints = sanitize(array_get($data, 'exam_points'));
+        $this->examPoints = (int)sanitize(array_get($data, 'exam_points'));
         $this->birthday = new DateTime(sanitize(array_get($data, 'birthday')));
         $this->gender = sanitize(array_get($data, 'gender'));
     }
