@@ -1,9 +1,9 @@
 {
-    "name": "feycot/student-list",
+    "name": "anon/student-list",
     "type": "project",
     "authors": [{
-        "name": "feycot",
-        "email": "feycot@gmail.com"
+        "name": "john doe",
+        "email": "dev@example.com"
     }],
     "autoload": {
         "psr-4": {
