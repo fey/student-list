@@ -37,23 +37,18 @@ use App\Support\HtmlHelper;
 
     <nav>
       <ul class="pagination">
-        <li
-          class="page-item <?= $currentPage === 1 ? 'disabled' : '' ?>"
-          class="<?= HtmlHelper::classNames(classes: ['page-item'], extras: ['disabled' => $currentPage === 1]) ?>"
-          >
-          <a href="?<?= http_build_query(['page' => $currentPage - 1]) ?>" class="page-link">Previous</a>
+        <li <?= HtmlHelper::class(['page-item', 'disabled' => $currentPage === 1]) ?>>
+          <a <?= HtmlHelper::href(query: ['page' => $currentPage - 1]) ?> <?= HtmlHelper::class(['page-link']) ?>> Previous </a>
         </li>
         <? foreach(range(1, $pagesCount) as $page): ?>
-        <li
-          class="<?= HtmlHelper::classNames(classes: ['page-item'], extras: ['active' => $page === $currentPage]) ?>"
-        >
-          <a class="page-link" href="?<?= http_build_query(['page' => $page]) ?>"><?= $page ?></a>
+        <li <?= HtmlHelper::class(['page-item', 'active' => $page === $currentPage]) ?>>
+          <a <?= HtmlHelper::href(query: ['page' => $page]) ?> <?= HtmlHelper::class(['page-link']) ?>> <?= $page ?> </a>
         </li>
         <? endforeach; ?>
-        <li
-        class="<?= HtmlHelper::classNames(classes: ['page-item'], extras: ['disabled' => $currentPage === $pagesCount]) ?>"
-        >
-          <a class="page-link" href="?<?= http_build_query(['page' => $currentPage + 1]) ?>">Next</a>
+        <li <?= HtmlHelper::class(['page-item', 'disabled' => $currentPage === $pagesCount]) ?>>
+          <a <?= HtmlHelper::class(['page-link']) ?> <?= HtmlHelper::href(query: ['page' => $currentPage + 1]) ?>>
+            Next
+          </a>
         </li>
       </ul>
     </nav>
