@@ -8,7 +8,13 @@ install:
 	composer install
 
 start:
-	php -S localhost:8000 -t public/
+	APP_ENV=development php -S localhost:8000 -t public/
+
+migrate:
+	APP_ENV=development php bin/migrate
+
+seed:
+	APP_ENV=development php bin/seed
 
 lint:
 	composer exec phpcs
@@ -21,12 +27,6 @@ setup-git-hooks:
 
 static-analyse:
 	composer exec phpstan analyse
-
-migrate:
-	php bin/migrate
-
-seed:
-	php bin/seed
 
 test:
 	composer exec phpunit

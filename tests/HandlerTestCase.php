@@ -5,6 +5,7 @@ namespace App\Tests;
 use App\Kernel;
 use PHPUnit\Framework\TestCase;
 
+use function App\Functions\getConfig;
 use function App\Functions\migrate;
 use function App\Functions\seed;
 
@@ -14,10 +15,12 @@ abstract class HandlerTestCase extends TestCase
 
     protected function setUp(): void
     {
-        $config = ['env' => 'testing'];
+        $config = getConfig();
 
-        migrate($config['env']);
-        seed($config['env']);
+        $databaseConnection = $config['database']['testing'];
+
+        migrate($databaseConnection);
+        seed($databaseConnection);
 
         $this->app = new Kernel($config);
     }

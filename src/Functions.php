@@ -68,10 +68,9 @@ function createPdo(string $dsn): PDO
     return new PDO($dsn);
 }
 
-function migrate(string $database): void
+function migrate(string $databaseConnection): void
 {
-    $baseDir = baseDir();
-    $pdo = new PDO("sqlite:{$baseDir}/database/{$database}.sqlite3");
+    $pdo = new PDO($databaseConnection);
 
     $pdo->exec(<<<SQL
     DROP TABLE IF EXISTS students;
@@ -89,10 +88,9 @@ function migrate(string $database): void
     SQL);
 }
 
-function seed(string $database): void
+function seed(string $databaseConnection): void
 {
-    $baseDir = baseDir();
-    $pdo = new PDO("sqlite:{$baseDir}/database/{$database}.sqlite3");
+    $pdo = new PDO($databaseConnection);
     $pdo->exec('DELETE FROM students');
 
     $birthday = new DateTime('1970-01-01');
@@ -127,4 +125,12 @@ function seed(string $database): void
 function sanitize($value): string
 {
     return addslashes(filter_var(strip_tags(filter_var($value)), FILTER_SANITIZE_STRING));
+}
+
+function getConfig(): array
+{
+    $baseDir = baseDir();
+    $config = require "{$baseDir}/src/config.php";
+
+    return $config;
 }

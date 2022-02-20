@@ -24,8 +24,9 @@ class Kernel
 
     public function run(): string
     {
-        $baseDir = baseDir();
-        $pdo = new PDO("sqlite:{$baseDir}/database/{$this->config['env']}.sqlite3");
+        $environment = $this->config['environment'];
+        $dbConnection = $this->config['database'][$environment];
+        $pdo = new PDO($dbConnection);
 
         $studentsTableGateway = new StudentsTableGateway($pdo);
         $passwordHasher = Hasher::build();

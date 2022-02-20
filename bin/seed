@@ -1,12 +1,16 @@
 #!/usr/bin/env php
 <?php
 
+use function App\Functions\getConfig;
 use function App\Functions\seed;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 echo "Starting seeds database...\n";
 
-seed('development');
+$config = getConfig();
+$env = $config['environment'];
+$databaseConnection = $config['database'][$env];
+seed($databaseConnection);
 
 echo "...Done!\n";
