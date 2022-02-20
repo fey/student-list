@@ -75,7 +75,7 @@ function migrate(string $databaseConnection): void
     $pdo->exec(<<<SQL
     DROP TABLE IF EXISTS students;
     CREATE TABLE IF NOT EXISTS students (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         first_name VARCHAR NOT NULL,
         last_name VARCHAR NOT NULL,
         gender VARCAHR NOT NULL,
