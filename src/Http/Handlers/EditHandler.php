@@ -65,7 +65,7 @@ class EditHandler implements HandlerInterface
         }
 
 
-        if ($this->isEmailUsedByAnotherStudent($student, $form->getEmail())) {
+        if ($this->isEmailBusy($student, $form->getEmail())) {
             http_response_code(422);
             return view('edit', [
                 'errors' => $form->errors(),
@@ -76,8 +76,15 @@ class EditHandler implements HandlerInterface
             ]);
         }
 
-        header('Location: /');
-        return '';
+        http_response_code(200);
+        return view('edit', [
+            'errors' => $form->errors(),
+            'form' => $form,
+            'flash' => [
+                'success' => 'Success',
+            ]
+
+        ]);
     }
 
     private function getCurrentUser(): Student
@@ -85,10 +92,14 @@ class EditHandler implements HandlerInterface
         return $this->studentsTableGateway->getById(Auth::id());
     }
 
-    private function isEmailUsedByAnotherStudent(Student $currentStudent, string $email): bool
+    private function isEmailBusy(Student $currentStudent, string $email): bool
     {
         $otherStudent = $this->studentsTableGateway->findByEmail($email);
 
-        return !$currentStudent->is($otherStudent);
+        if ($otherStudent === null) {
+            return false;
+        }
+
+        return $currentStudent->id === $otherStudent->id;
     }
 }
