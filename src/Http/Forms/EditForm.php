@@ -5,6 +5,7 @@ namespace App\Http\Forms;
 use DateTime;
 
 use function App\Functions\array_get;
+use function App\Functions\sanitize;
 
 class EditForm extends Form
 {
@@ -22,14 +23,14 @@ class EditForm extends Form
 
     public function __construct(array $data)
     {
-        $this->firstName = array_get($data, 'first_name');
-        $this->lastName = array_get($data, 'last_name');
-        $this->email = array_get($data, 'email');
-        $this->password = array_get($data, 'password');
-        $this->groupId = array_get($data, 'group_id');
-        $this->examPoints = array_get($data, 'exam_points');
-        $this->birthday = new DateTime(array_get($data, 'birthday'));
-        $this->gender = array_get($data, 'gender');
+        $this->firstName = sanitize(array_get($data, 'first_name'));
+        $this->lastName = sanitize(array_get($data, 'last_name'));
+        $this->email = trim(sanitize(array_get($data, 'email')));
+        $this->password = strtolower(sanitize(array_get($data, 'password')));
+        $this->groupId = strtolower(sanitize(array_get($data, 'group_id')));
+        $this->examPoints = sanitize(array_get($data, 'exam_points'));
+        $this->birthday = new DateTime(sanitize(array_get($data, 'birthday')));
+        $this->gender = sanitize(array_get($data, 'gender'));
     }
 
     public function validate(): void

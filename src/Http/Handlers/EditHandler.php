@@ -64,7 +64,9 @@ class EditHandler implements HandlerInterface
             http_response_code(422);
             return view('edit', [
                 'errors' => $form->errors(),
-                'flash' => 'Email address is already used by another'
+                'flash' => [
+                    'error' => 'Email address is already used by another'
+                ]
             ]);
         }
 

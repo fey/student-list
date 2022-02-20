@@ -59,6 +59,10 @@ class Student
             return false;
         }
 
+        if ($this->id === null) {
+            return false;
+        }
+
         return $this->id === $otherStudent->id;
     }
 }

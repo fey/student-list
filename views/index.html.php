@@ -19,16 +19,16 @@ use App\Support\HtmlHelper;
           <th scope="col">First name</th>
           <th scope="col">Last last</th>
           <th scope="col">Group ID</th>
-          <th scope="col" style="width: 25%;">Unified State Exam points</th>
+          <th scope="col" style="width: 25%;">Exam points</th>
         </tr>
       </thead>
       <tbody>
         <?php foreach ($students as $student): ?>
           <tr>
-            <td><?= $student->firstName ?></td>
-            <td><?= $student->lastName ?></td>
-            <td><?= $student->groupId ?></td>
-            <td><?= $student->examPoints ?></td>
+            <td><?= htmlspecialchars($student->firstName) ?></td>
+            <td><?= htmlspecialchars($student->lastName) ?></td>
+            <td><?= htmlspecialchars(strtoupper($student->groupId)) ?></td>
+            <td><?= htmlspecialchars($student->examPoints) ?></td>
           </tr>
         <?php endforeach ?>
       </tbody>

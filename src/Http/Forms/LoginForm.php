@@ -3,6 +3,7 @@
 namespace App\Http\Forms;
 
 use function App\Functions\array_get;
+use function App\Functions\sanitize;
 
 class LoginForm extends Form
 {
@@ -11,8 +12,8 @@ class LoginForm extends Form
 
     public function __construct(array $data)
     {
-        $this->email = array_get($data, 'email');
-        $this->password = array_get($data, 'password');
+        $this->email = sanitize(array_get($data, 'email'));
+        $this->password = sanitize(array_get($data, 'password'));
     }
 
     public function validate(): void

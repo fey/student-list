@@ -123,3 +123,8 @@ function seed(string $database): void
         VALUES {$joinedValuesParts};\n";
     $pdo->exec($resultQuery);
 }
+
+function sanitize($value): string
+{
+    return addslashes(filter_var(strip_tags(filter_var($value)), FILTER_SANITIZE_STRING));
+}

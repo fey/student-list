@@ -32,7 +32,7 @@ class RegisterHandler implements HandlerInterface
     private function renderForm()
     {
         http_response_code(200);
-        return view('register', ['errors' => []]);
+        return view('register', ['errors' => [], 'input' => new RegisterForm([])]);
     }
 
     private function registerStudent()
@@ -44,10 +44,10 @@ class RegisterHandler implements HandlerInterface
 
         if (!$form->isValid()) {
             http_response_code(422);
-            return view('register', ['errors' => $form->errors()]);
+            return view('register', ['errors' => $form->errors(), 'input' => $form]);
         }
 
-        $hashedPassword = $this->hasher->hashPassword($form->getPassword(), PASSWORD_BCRYPT);
+        $hashedPassword = $this->hasher->hashPassword($form->getPassword());
 
         $student = new Student(
             null,
@@ -61,11 +61,29 @@ class RegisterHandler implements HandlerInterface
             $form->getExamPoints()
         );
 
+        if ($this->isEmailBusy($form->getEmail())) {
+            http_response_code(422);
+            return view('register', [
+                'errors' => $form->errors(),
+                'input' => $form,
+                'flash' => [
+                    'error' => 'Email address is already used by another'
+                ]
+            ]);
+        }
+
         $student = $this->studentsTableGateway->create($student->toArray());
 
         $createdStudent = $this->studentsTableGateway->findByEmail($form->getEmail());
         Auth::login($createdStudent);
         header('Location: /');
         return '';
+    }
+
+    private function isEmailBusy(string $email): bool
+    {
+        $otherStudent = $this->studentsTableGateway->findByEmail($email);
+
+        return $otherStudent !== null;
     }
 }
