@@ -78,7 +78,7 @@ function migrate(string $databaseConnection): void
         id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         first_name VARCHAR NOT NULL,
         last_name VARCHAR NOT NULL,
-        gender VARCAHR NOT NULL,
+        gender VARCHAR NOT NULL,
         email VARCHAR UNIQUE NOT NULL,
         hashed_password VARCHAR NOT NULL,
         group_id VARCHAR,
