@@ -10,6 +10,7 @@ use App\Http\Handlers\Errors\NotFoundHandler;
 use App\Http\Handlers\Auth\LogoutHandler;
 use App\Http\Handlers\Auth\RegisterHandler;
 use App\Http\Handlers\Auth\LoginHandler;
+use App\Http\Session;
 
 use function App\Functions\array_get;
 use function App\Functions\getRequestPath;
@@ -50,9 +51,7 @@ class Kernel
 
         $handler = array_get($handlersByRoutesMap, getRequestPath(), $notFoundHandler);
 
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
-        }
+        Session::start();
 
         return $handler->handle();
     }

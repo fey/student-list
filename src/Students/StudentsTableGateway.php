@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Students;
 
 use DomainException;
 use PDO;
+
+use function App\Functions\array_get;
 
 class StudentsTableGateway
 {
@@ -14,9 +18,15 @@ class StudentsTableGateway
     /**
      * @return Student[]
      */
-    public function getAll(): array
+    public function getAll(int $limit, int $offset): array
     {
-        $statement = $this->pdo->query('SELECT * FROM students');
+        $statement = $this->pdo->prepare('SELECT * FROM students LIMIT :limit_param OFFSET :offset_param');
+
+        $limitParam  = $limit;
+        $offsetParam = $offset;
+        $statement->bindParam(':limit_param', $limitParam, PDO::PARAM_INT);
+        $statement->bindParam(':offset_param', $offsetParam, PDO::PARAM_INT);
+        $statement->execute();
 
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -67,5 +77,15 @@ class StudentsTableGateway
         }
 
         return Student::fromArray($data);
+    }
+
+    public function countAll(): int
+    {
+        $query = 'SELECT COUNT(*) as count from students';
+        $statement = $this->pdo->query($query);
+
+        $data = $statement->fetchColumn();
+
+        return (int)$data;
     }
 }

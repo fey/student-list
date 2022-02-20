@@ -30,10 +30,11 @@ function getRequestPath(): ?string
 function getQueryParams(): array
 {
     $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
+    $queryString = array_get($parsedUrl, 'query');
 
     $result = [];
 
-    parse_str($parsedUrl['query'], $result);
+    parse_str($queryString, $result);
 
     return $result;
 }
@@ -97,7 +98,7 @@ function seed(string $database): void
     $birthday = new DateTime('1970-01-01');
     $passwordHasher = Hasher::build();
 
-    $valuesParts = array_reduce(range(1, 10), function ($acc, $i) use ($birthday, $passwordHasher) {
+    $valuesParts = array_reduce(range(1, 100), function ($acc, $i) use ($birthday, $passwordHasher) {
         $examPoints = rand(50, 200);
         $attributes = [
             "first_name ${i}",

@@ -24,6 +24,7 @@ class EditHandler implements HandlerInterface
     public function handle()
     {
         if (!Auth::check()) {
+            http_response_code(401);
             return '';
         }
 

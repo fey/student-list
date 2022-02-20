@@ -1,3 +1,13 @@
+<?php
+/**
+ * @var int $currentPage
+ * @var \App\Students\Student[] $students
+ */
+
+use App\Support\HtmlHelper;
+
+?>
+
 <?php include('shared/head.html.php') ?>
 
 <main>
@@ -27,16 +37,23 @@
 
     <nav>
       <ul class="pagination">
-        <li class="page-item disabled">
-          <a class="page-link">Previous</a>
+        <li
+          class="page-item <?= $currentPage === 1 ? 'disabled' : '' ?>"
+          class="<?= HtmlHelper::classNames(classes: ['page-item'], extras: ['disabled' => $currentPage === 1]) ?>"
+          >
+          <a href="?<?= http_build_query(['page' => $currentPage - 1]) ?>" class="page-link">Previous</a>
         </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item" aria-current="page">
-          <a class="page-link" href="#">2</a>
+        <? foreach(range(1, $pagesCount) as $page): ?>
+        <li
+          class="<?= HtmlHelper::classNames(classes: ['page-item'], extras: ['active' => $page === $currentPage]) ?>"
+        >
+          <a class="page-link" href="?<?= http_build_query(['page' => $page]) ?>"><?= $page ?></a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
+        <? endforeach; ?>
+        <li
+        class="<?= HtmlHelper::classNames(classes: ['page-item'], extras: ['disabled' => $currentPage === $pagesCount]) ?>"
+        >
+          <a class="page-link" href="?<?= http_build_query(['page' => $currentPage + 1]) ?>">Next</a>
         </li>
       </ul>
     </nav>
