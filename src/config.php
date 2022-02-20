@@ -3,7 +3,7 @@
 use function App\Functions\baseDir;
 
 $baseDir = baseDir();
-$dbUsername = getenv('DB_USERNAME');
+$dbUsername = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
 $dbName = getenv('DB_NAME');
 $dbPort = getenv('DB_PORT');
