@@ -50,7 +50,10 @@ class Kernel
 
         $handler = array_get($handlersByRoutesMap, getRequestPath(), $notFoundHandler);
 
-        session_start();
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+
         return $handler->handle();
     }
 }
