@@ -24,7 +24,7 @@ class IndexHandler implements HandlerInterface
         $students = $this->studentsTableGateway->getAll($limit, $offset);
 
         $totalCount = $this->studentsTableGateway->countAll();
-        $pagesCount = (int)($totalCount / $limit);
+        $pagesCount = (int)ceil($totalCount / $limit);
 
         http_response_code(200);
         return view('index', [

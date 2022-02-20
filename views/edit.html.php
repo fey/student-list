@@ -19,7 +19,7 @@ use function App\Functions\array_get;
             <input
               type="text"
               name="user[first_name]"
-              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('first_name', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('first_name', $errors)]) ?>"
               id="user_first_name"
               aria-describedby="first_name_help"
               value="<?= $student->firstName ?>"
@@ -31,7 +31,7 @@ use function App\Functions\array_get;
             <input
               type="text"
               name="user[last_name]"
-              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('last_name', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('last_name', $errors)]) ?>"
               id="user_last_name"
               aria-describedby="first_name_help"
               value="<?= $student->lastName ?>"
@@ -43,7 +43,7 @@ use function App\Functions\array_get;
             <input
               type="email"
               name="user[email]"
-              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('email', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('email', $errors)]) ?>"
               id="user_email"
               aria-describedby="emailHelp"
               value="<?= $student->email ?>"
@@ -56,7 +56,7 @@ use function App\Functions\array_get;
             <input
               type="password"
               name="user[password]"
-              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('password', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('password', $errors)]) ?>"
               id="user_password"
             >
             <div class="invalid-feedback"><?= array_get($errors, 'password') ?></div>
@@ -66,7 +66,7 @@ use function App\Functions\array_get;
             <input
               type="text"
               name="user[group_id]"
-              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('group_id', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('group_id', $errors)]) ?>"
               id="user_group_id"
               value="<?= $student->groupId ?>"
             >
@@ -77,7 +77,7 @@ use function App\Functions\array_get;
             <input
               type="number"
               name="user[exam_points]"
-              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('exam_points', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('exam_points', $errors)]) ?>"
               id="user_exam_points"
               value="<?= $student->examPoints ?>"
             >
@@ -85,7 +85,7 @@ use function App\Functions\array_get;
           </div>
           <div class="mb-3">
             <label for="user_birthday_date" class="form-label">Birthday Date</label>
-            <input type="date" name="user[birthday]" class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('birthday', $errors)]) ?>"
+            <input type="date" name="user[birthday]" <?= HtmlHelper::class(['form-control','is-invalid' => array_key_exists('birthday', $errors)]) ?>"
             id="user_birthday_date"
             max="2005-01-01"
             value="<?= $student->birthday->format('Y-m-d') ?>"
@@ -94,7 +94,7 @@ use function App\Functions\array_get;
           </div>
           <div class="form-check">
             <input
-              class="<?= HtmlHelper::classNames(classes: ['form-check-input'], extras: ['is-invalid' => array_key_exists('gender', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control-input', 'is-invalid' => array_key_exists('gender', $errors)]) ?>"
               type="radio"
               name="user[gender]"
               id="user_gender1"
@@ -107,7 +107,7 @@ use function App\Functions\array_get;
           </div>
           <div class="form-check">
             <input
-              class="<?= HtmlHelper::classNames(classes: ['form-check-input'], extras: ['is-invalid' => array_key_exists('gender', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control-input', 'is-invalid' => array_key_exists('gender', $errors)]) ?>"
               type="radio"
               name="user[gender]"
               id="user_gender2"
