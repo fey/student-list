@@ -15,7 +15,7 @@ include('shared/head.html.php') ?>
             <input
               type="text"
               name="user[first_name]"
-              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('first_name', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('first_name', $errors)]) ?>"
               id="user_first_name"
               aria-describedby="first_name_help"
               >
@@ -26,7 +26,7 @@ include('shared/head.html.php') ?>
             <input
               type="text"
               name="user[last_name]"
-              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('last_name', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('last_name', $errors)]) ?>"
               id="user_last_name"
               aria-describedby="first_name_help"
             >
@@ -37,7 +37,7 @@ include('shared/head.html.php') ?>
             <input
               type="email"
               name="user[email]"
-              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('email', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('email', $errors)]) ?>"
               id="user_email"
               aria-describedby="emailHelp">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
@@ -48,7 +48,7 @@ include('shared/head.html.php') ?>
             <input
               type="password"
               name="user[password]"
-              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('password', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('password', $errors)]) ?>"
               id="user_password">
             <div class="invalid-feedback"><?= array_get($errors, 'password') ?></div>
           </div>
@@ -57,7 +57,7 @@ include('shared/head.html.php') ?>
             <input
               type="text"
               name="user[group_id]"
-              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('group_id', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('group_id', $errors)]) ?>"
               id="user_group_id">
             <div class="invalid-feedback"><?= array_get($errors, 'group_id') ?></div>
           </div>
@@ -66,19 +66,19 @@ include('shared/head.html.php') ?>
             <input
               type="number"
               name="user[exam_points]"
-              class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('exam_points', $errors)]) ?>"
+              <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('exam_points', $errors)]) ?>"
               id="user_exam_points">
             <div class="invalid-feedback"><?= array_get($errors, 'exam_points') ?></div>
           </div>
           <div class="mb-3">
             <label for="user_birthday_date" class="form-label">Birthday Date</label>
-            <input type="date" name="user[birthday]" class="<?= HtmlHelper::classNames(classes: ['form-control'], extras: ['is-invalid' => array_key_exists('birthday', $errors)]) ?>"
+            <input type="date" name="user[birthday]" <?= HtmlHelper::class(['form-control', 'is-invalid' => array_key_exists('birthday', $errors)]) ?>"
             id="user_birthday_date"
             max="2005-01-01">
             <div class="invalid-feedback"><?= array_get($errors, 'birthday') ?></div>
           </div>
           <div class="form-check">
-            <input class="<?= HtmlHelper::classNames(classes: ['form-check-input'], extras: ['is-invalid' => array_key_exists('gender', $errors)]) ?>"
+            <input <?= HtmlHelper::class(['form-control-input', 'is-invalid' => array_key_exists('gender', $errors)]) ?>"
             type="radio" name="user[gender]"
             id="user_gender1" value="male">
             <label class="form-check-label" for="user_gender1">
@@ -86,7 +86,7 @@ include('shared/head.html.php') ?>
             </label>
           </div>
           <div class="form-check">
-            <input class="<?= HtmlHelper::classNames(classes: ['form-check-input'], extras: ['is-invalid' => array_key_exists('gender', $errors)]) ?>"
+            <input <?= HtmlHelper::class(['form-control-input', 'is-invalid' => array_key_exists('gender', $errors)]) ?>"
             type="radio" name="user[gender]" id="user_gender2" value="female">
             <label class="form-check-label" for="user_gender2">
               Female

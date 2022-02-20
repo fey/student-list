@@ -98,7 +98,7 @@ function seed(string $database): void
     $birthday = new DateTime('1970-01-01');
     $passwordHasher = Hasher::build();
 
-    $valuesParts = array_reduce(range(1, 100), function ($acc, $i) use ($birthday, $passwordHasher) {
+    $valuesParts = array_reduce(range(1, 30), function ($acc, $i) use ($birthday, $passwordHasher) {
         $examPoints = rand(50, 200);
         $attributes = [
             "first_name ${i}",

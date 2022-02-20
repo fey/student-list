@@ -42,7 +42,7 @@ class RegisterHandlerTest extends HandlerTestCase
         $this->assertEquals(302, http_response_code());
 
         $this->assertTrue(Auth::isSigned(), 'User should signed in');
-        $this->assertEquals(11, Auth::id());
+        $this->assertEquals(31, Auth::id());
     }
 
     public function testValidationFails(): void
